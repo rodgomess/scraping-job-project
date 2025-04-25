@@ -12,16 +12,19 @@ import asyncio
 async def main():
     async with async_playwright() as p:
         # Configurando o browser
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(headless=False)
         context = await browser.new_context()
         page = await context.new_page()
 
         try:
+            # Quantidade de vezes para clicar em Ver mais Vagas (aumenta a quantidade de vagas para extração)
+            times_click_see_more = 10
+
             # Criando uma lista de links
-            links_job = await get_link_jobs(page)
+            links_job = await get_link_jobs(page, times_click_see_more)
             
             # Quantidade total de chunks
-            chunk_size = 50
+            chunk_size = 100
 
             # Processamento paralelizado em chunks
             output = await parallelize_extract(links_job, chunk_size, context)

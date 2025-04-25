@@ -37,6 +37,9 @@ async def extract_basic_info_job(page):
         # Nome da empresa
         info['nome_empresa'] = await page.locator("h2.job-shortdescription__company").inner_text()
 
+        # Data de plublicação
+        info['nome_empresa'] = await page.locator("h2.job-shortdescription__company").inner_text()
+
         # Lista de intens contendo Salario, Local e Regime Trabalista
         itens = page.locator("div.infoVaga ul li")
         info['salario'] = await itens.nth(0).locator('div').inner_text()
@@ -90,11 +93,19 @@ async def get_info_job(link, context):
     await page.close()
     return info
 
-async def get_link_jobs(page):
+async def get_link_jobs(page, times_click_see_more):
 
     # Site contendo vagas de tecnologia em forma de lista resumida
     await page.goto("https://www.vagas.com.br/vagas-de-tecnologia", wait_until="domcontentloaded")
-    await page.wait_for_selector("#todasVagas ul li.vaga")
+    # await page.wait_for_selector("#todasVagas ul li.vaga")
+
+    for _ in range(times_click_see_more):
+        try:
+            await page.get_by_role("link", name="mostrar mais vagas").click()
+            await page.wait_for_timeout(500)  # Dá um pequeno tempo pra página carregar
+        except Exception as e:
+            print(f"Não foi possível clicar em 'mostrar mais vagas': {e}")
+            break
 
     # Lista de elemento contendo link para a vaga
     jobs = page.locator("#todasVagas ul li.vaga")
