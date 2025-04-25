@@ -1,8 +1,6 @@
 from playwright.async_api import async_playwright
 import asyncio
-import pandas as pd
 from datetime import datetime
-import os
 
 def chunk_list(lst, size):
     """
@@ -21,15 +19,34 @@ def chunk_list(lst, size):
 
 
 async def extract_basic_info_job(page):
-    """Extrai salário, local e regime de trabalho da vaga."""
+    """
+    Extrai informações basicas como nome, regime trabalista e etc
+
+    Parâmetros:
+        page: Pagina contida no browser
+
+    Retorna:
+        dict: Um dicionario contendo informações da vaga
+    """
+
     info = {}
     try:
+        # Cargo
+        info['cargo'] = await page.locator("h1").inner_text()
+
+        # Nome da empresa
+        info['nome_empresa'] = await page.locator("h2.job-shortdescription__company").inner_text()
+
+        # Lista de intens contendo Salario, Local e Regime Trabalista
         itens = page.locator("div.infoVaga ul li")
         info['salario'] = await itens.nth(0).locator('div').inner_text()
         info['local'] = await itens.nth(1).locator('div span.info-localizacao').inner_text()
         info['regime_trabalista'] = await itens.nth(2).locator('div').inner_text()
+
     except Exception as e:
         print(f"[!] Erro ao extrair info básica: {e}")
+        info['cargo'] = None
+        info['nome_empresa'] = None
         info['salario'] = None
         info['local'] = None
         info['regime_trabalista'] = None
@@ -103,26 +120,3 @@ async def parallelize_extract(links_job, chunk_size, context):
         output.extend(output_set)
     
     return output
-
-def save_output(output):
-    # Path para salvar
-    current_date = datetime.now().date()
-
-    # Definindo o caminho do diretório e do arquivo
-    directory_path = f"datalake/vagasdotcom/{current_date}"
-    file_path = f"{directory_path}/vagas_extraidas.csv"
-    
-    # Criando Data Frame
-    df = pd.DataFrame(output)
-
-    # Adicionando campos de controle
-    df['datetime_execution'] = pd.to_datetime(datetime.now())
-    df['date_execution'] = pd.to_datetime(datetime.now().date())
-
-    # Verificando se o diretório existe, se não, criando-o
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-    
-    # Salvando os dados
-    df.to_csv(file_path, index=False)
-    print(f"✅ Dados salvos com sucesso em: {file_path}")

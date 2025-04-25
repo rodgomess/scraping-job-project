@@ -1,0 +1,10 @@
+# Bytecode Python
+__pycache__/
+
+# Ambiente virtual
+venv/
+.env/
+
+# Dados brutos
+/dataleke/
+*.csv

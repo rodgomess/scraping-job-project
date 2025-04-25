@@ -1,4 +1,11 @@
-from functions_scrapring.functions import get_link_jobs, parallelize_extract, save_output
+import sys
+import os
+
+# Garatindo que abspath é o caminho raiz do projeto
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from functions_scrapring.functions import get_link_jobs, parallelize_extract
+from utils.helper import save_output
 from playwright.async_api import async_playwright
 import asyncio
 
