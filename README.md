@@ -40,7 +40,9 @@ Este projeto permite extrair vagas a partir de palavras-chave e filtros específ
    - Os dados limpos são exibidos no Streamlit
    - Filtros podem ser aplicados em qualquer coluna diretamente na interface
 
-💡 Diferenciais
+---
+
+## 💡 Diferenciais
 Automação 100% funcional com múltiplas abas (paralelismo leve)
 
 Integração entre scraping e frontend interativo
@@ -51,12 +53,18 @@ Nenhuma duplicidade de vagas no histórico
 
 Filtros dinâmicos em todas as colunas
 
+---
+
 ## 📌 Observações
 Este projeto é apenas para fins educacionais e de portfólio. Respeite os termos de uso do vagas.com.
 
 Caso deseje adaptar para outros sites, a estrutura está modularizada.
 
+---
+
 ## 📷 Screenshots
+
+---
 
 ## 🧑‍💻 Autor
 Rodrigo Gomes
