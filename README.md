@@ -63,6 +63,9 @@ Caso deseje adaptar para outros sites, a estrutura está modularizada.
 ---
 
 ## 📷 Screenshots
+![image](https://github.com/user-attachments/assets/32076512-5f4c-444c-a774-93b56a704cb0)
+
+![image](https://github.com/user-attachments/assets/7729be86-8402-4380-9fe5-8b211136961d)
 
 ---
 
