@@ -51,13 +51,13 @@ Nenhuma duplicidade de vagas no histórico
 
 Filtros dinâmicos em todas as colunas
 
-📌 Observações
+## 📌 Observações
 Este projeto é apenas para fins educacionais e de portfólio. Respeite os termos de uso do vagas.com.
 
 Caso deseje adaptar para outros sites, a estrutura está modularizada.
 
-📷 Screenshots
+## 📷 Screenshots
 
-🧑‍💻 Autor
+## 🧑‍💻 Autor
 Rodrigo Gomes
-🔗 LinkedIn https://www.linkedin.com/in/rodrigogomes-profile/
+🔗 [LinkedIn](https://www.linkedin.com/in/rodrigogomes-profile/)
